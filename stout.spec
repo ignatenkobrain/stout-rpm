@@ -58,9 +58,9 @@ cp -r ./include/stout %{buildroot}%{_includedir}/
 - In release added git shotcommit
 - In BuildRequires added automake
 - Droped BuildRoot target (since Fedora 18 was deprecated)
-- Dropped %clean section (since Fedora 18 was deprecated)
-- Dropped %defattr directives (since Fedora 18 was deprecated)
-- Dropped %files section (not needed)
+- Dropped %%clean section (since Fedora 18 was deprecated)
+- Dropped %%defattr directives (since Fedora 18 was deprecated)
+- Dropped %%files section (not needed)
 - other fixes
 
 * Mon Jul 29 2013 Timothy St. Clair <tstclair@redhat.com> 0.1.0-1
