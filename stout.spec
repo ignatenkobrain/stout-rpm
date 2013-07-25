@@ -58,8 +58,12 @@ make %{?_smp_mflags}
 
 
 %install
-%{?el5:rm -rf %{buildroot}}
-%make_install
+%if 0%{?el5}
+  rm -rf %{buildroot}
+  make install DESTDIR=%{buildroot}
+%else
+  %make_install
+%endif
 
 
 %clean
