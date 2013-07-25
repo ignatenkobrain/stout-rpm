@@ -98,6 +98,5 @@ make %{?_smp_mflags}
 - Dropped %%files section (not needed)
 - other fixes
 
-
 * Mon Jul 22 2013 Timothy St. Clair <tstclair@redhat.com> 0.1.0-1
 - initial fedora package
