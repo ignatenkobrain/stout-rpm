@@ -14,28 +14,17 @@ URL:            https://github.com/3rdparty/stout
 
 ## Will use this when pull-request in merged by upstream
 #  https://github.com/3rdparty/stout/pull/4
-#Source0:        https://github.com/3rdparty/stout/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
+#Source0:        %{url}/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
 #
 #  We'll use this during devel :)
+#
 Source0:        https://github.com/besser82/stout/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
-
-## pkg-config-file forces arched pkg
-#BuildArch:      noarch
+%{?el5:BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)}
 
 BuildRequires:  automake
 
-%description
-Stout is a header only library that is contains a series of primitives 
-to assist in the development of building sturdy C++ applications.  Currently
-this application is leveraged by Mesos.
+Provides:       %{name}-devel%{?isa} = %{version}-%{release}
 
-
-%package devel
-Summary:        C++ headers for building sturdy software
-Group:          Development/Libraries
-Provides:       %{name}%{?isa} = %{version}-%{release}
-## This is superflous and useless, isn't it?
-#Requires:       %{name}%{?isa} = %{version}-%{release}
 Requires:       boost-devel%{?isa}
 Requires:       protobuf-devel%{?isa}
 ## TBD - glog removed in the future
@@ -43,36 +32,41 @@ Requires:       glog-devel%{?isa}
 Requires:       gmock-devel%{?isa}
 Requires:       gtest-devel%{?isa}
 
-%description devel
+%description
 Headers used for for development of sturdy applications, and leveraged
 by Mesos.
 
-Stout is a header only library that is contains a series of primitives 
+Stout is a header only library that is contains a series of primitives
 to assist in the development of building sturdy C++ applications.  Currently
 this application is leveraged by Mesos.
 
 Note: as that project has only headers (i.e., no library/binary object),
-this package (i.e., the -devel package) is the one containing all of the 
+this package (i.e., the -devel package) is the one containing all of the
 project.  There's no package with a library to link for this.
 
 
 %prep
 %setup -qn %{name}-%{commit}
+cp -pr ./tests ./examples
+rm -rf ./examples/*.a[cm]
 
 
 %build
 autoreconf -vfi
 %configure
-make %{?_smp_mflags} 
+make %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot}
+%{?el5:rm -rf %{buildroot}}
 %make_install
-cp -pr ./tests ./examples
 
 
-%files devel
+%clean
+%{?el5:rm -rf %{buildroot}}
+
+
+%files
 %{_libdir}/pkgconfig/*
 %{_includedir}/%{name}/
 %doc LICENSE README.md examples
@@ -86,6 +80,10 @@ cp -pr ./tests ./examples
 - adding test-dir as examples
 - using autoreconf instead of bootstrap-script
 - disable building debuginfo
+- general clean-up and nuked trailing whitespaces
+- added needs for el5
+- changed %%define --> %%global
+- dropped -devel-subpkg without main-pkg and make pkg provide -devel
 
 * Mon Jul 22 2013 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 0.1.0-1.270dba8
 - In release added git shotcommit
