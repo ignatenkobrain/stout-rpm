@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
-%global commit 10f7b887a96f1bbcc64c9e14f9450c427b0de83e
+%global commit 2d3d1abfd0bed2fa3deadb70894648b62fe43cf7
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           stout
 Summary:        C++ headers for building sturdy software
 Version:        0.1.1
-Release:        1.%{shortcommit}%{?dist}
+Release:        2.%{shortcommit}%{?dist}
 
 Group:          Development/Libraries
 License:        ASL 2.0
@@ -20,6 +20,7 @@ URL:            https://github.com/3rdparty/stout
 #
 Source0:        https://github.com/besser82/stout/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
 %{?el5:BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)}
+BuildArch:      noarch
 
 BuildRequires:  automake
 
@@ -71,15 +72,19 @@ make %{?_smp_mflags}
 
 
 %files
-%{_libdir}/pkgconfig/*
+%{_datadir}/pkgconfig/*
 %{_includedir}/%{name}/
 %doc LICENSE README.md examples
 
 
 %changelog
+* Thu Jul 25 2013 Björn Esser <bjoern.esser@gmail.com> - 0.1.1-2.2d3d1ab
+- use datadir instead of libdir for pkg-config
+- make package noarch again
+
 * Thu Jul 25 2013 Björn Esser <bjoern.esser@gmail.com> - 0.1.1-1.10f7b88
 - new version
-- ships a pkg-config-file now
+- ships a pkg-config-file now, must be arched now
 - make install-target is supported
 - adding test-dir as examples
 - using autoreconf instead of bootstrap-script
