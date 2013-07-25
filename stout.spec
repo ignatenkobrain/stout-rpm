@@ -22,7 +22,7 @@ Source0:        https://github.com/besser82/stout/archive/%{commit}/%{name}-%{ve
 ## pkg-config-file forces arched pkg
 #BuildArch:      noarch
 
-BuildRequires:  automake
+BuildRequires:  automake, autoconf
 
 %description
 Stout is a header only library that is contains a series of primitives 
