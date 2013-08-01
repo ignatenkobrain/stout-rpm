@@ -1,6 +1,6 @@
 %global debug_package %{nil}
 
-%global commit 2d3d1abfd0bed2fa3deadb70894648b62fe43cf7
+%global commit a40179239e30a4e3a7092116af710712efebeb10
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           stout
@@ -32,6 +32,8 @@ Requires:       protobuf-devel%{?isa}
 Requires:       glog-devel%{?isa}
 Requires:       gmock-devel%{?isa}
 Requires:       gtest-devel%{?isa}
+Requires:       libz-devel%{?isa}
+Requires:       libcurl-devel%{?isa}
 
 %description
 Headers used for for development of sturdy applications, and leveraged
