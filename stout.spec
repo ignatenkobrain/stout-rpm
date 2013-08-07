@@ -23,6 +23,8 @@ Source0:        https://github.com/besser82/stout/archive/%{commit}/%{name}-%{ve
 BuildArch:      noarch
 
 BuildRequires:  automake
+BuildRequires:  zlib-devel
+BuildRequires:  libcurl-devel
 
 Provides:       %{name}-devel%{?isa} = %{version}-%{release}
 
@@ -32,7 +34,7 @@ Requires:       protobuf-devel%{?isa}
 Requires:       glog-devel%{?isa}
 Requires:       gmock-devel%{?isa}
 Requires:       gtest-devel%{?isa}
-Requires:       libz-devel%{?isa}
+Requires:       zlib-devel%{?isa}
 Requires:       libcurl-devel%{?isa}
 
 %description
