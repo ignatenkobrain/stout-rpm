@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
-%global commit a40179239e30a4e3a7092116af710712efebeb10
+%global commit 7c9d71c8fda7719e5cc071b39377e85a7a450781
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           stout
 Summary:        C++ headers for building sturdy software
 Version:        0.1.1
-Release:        2.%{shortcommit}%{?dist}
+Release:        3.%{shortcommit}%{?dist}
 
 Group:          Development/Libraries
 License:        ASL 2.0
@@ -82,6 +82,9 @@ make %{?_smp_mflags}
 
 
 %changelog
+* Fri Aug  9 2013 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 0.1.1-3.7c9d71c
+- Update to latest
+
 * Thu Jul 25 2013 Björn Esser <bjoern.esser@gmail.com> - 0.1.1-2.2d3d1ab
 - use datadir instead of libdir for pkg-config
 - make package noarch again
