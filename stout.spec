@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
-%global commit 7c9d71c8fda7719e5cc071b39377e85a7a450781
+%global commit c784a5efc2431babcb39a078f8b2af5b7bf5f0cb
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           stout
 Summary:        C++ headers for building sturdy software
 Version:        0.1.1
-Release:        3.%{shortcommit}%{?dist}
+Release:        5.%{shortcommit}%{?dist}
 
 Group:          Development/Libraries
 License:        ASL 2.0
@@ -61,6 +61,8 @@ autoreconf -vfi
 %configure
 make %{?_smp_mflags}
 
+%check
+make check
 
 %install
 %if 0%{?el5}
@@ -78,10 +80,16 @@ make %{?_smp_mflags}
 %files
 %{_datadir}/pkgconfig/*
 %{_includedir}/%{name}/
-%doc LICENSE README.md examples
+%doc LICENSE README examples
 
 
 %changelog
+* Tue Sep 3 2013 Timothy St. Clair <tstclair@redhat.com> 0.1.0-5.b1d3cc4d
+- Minor update to the tip of mesos
+
+* Fri Aug 16 2013 Timothy St. Clair <tstclair@redhat.com> 0.1.0-4.4e63c67
+- Updating to the tip of mesos dated 8.15.2013
+
 * Fri Aug  9 2013 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 0.1.1-3.7c9d71c
 - Update to latest
 
